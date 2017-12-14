@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>{{ title }}</title>
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+        <!-- Optional theme -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <!-- plot.ly js -->
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    </head>
+
+    <body style='padding-bottom: 70px;'>
+        <div class="container">
+            <div class="row">
+                <div class="page-header">
+                    <h1> {{ title }} </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="well"><a href="https://www.example.com">Current list of known issues with this job (TODO)</a></div>
+            </div>
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Today's Summary</h3>
+                    </div>
+                    <div class="panel-body">
+                        <ul>
+                            <li><strong>Success:</strong> {{ '%0.0f' % df_stats['success'][df_stats.index[-1]]|float }} jobs ({{ df_stats['success_pct'][df_stats.index[-1]] }} %)</li>
+                            <li><strong>Failure:</strong> {{ '%0.0f' % df_stats['failure'][df_stats.index[-1]]|float }} jobs ({{ df_stats['failure_pct'][df_stats.index[-1]] }} %)</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                {{ status_plot }}
+            </div>
+            <div class="row">
+                {{ slave_status_plot }}
+            </div>
+            <div class="row">
+                {{ duration_plot }}
+            </div>
+            <div class="row">
+                {{ slave_duration_plot }}
+            </div>
+            <div class="row">
+                <small>
+                    Generated at {{ timestamp_dt.strftime('%H:%M') }} on {{ timestamp_dt.strftime('%d-%b-%Y') }} by https://github.com/HewlettPackard/jenkins-stats
+                 </small>
+            </div>
+        </div>
+    </body>
+</html>
