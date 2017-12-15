@@ -56,7 +56,21 @@ You can then view the report by opening /var/tmp/jenkins/my-jenkins-job.html in 
 
 ### Running as container
 
-TODO
+#### Build container
+
+- Set VERSION to the version you want to use for your image (https://semver.org/)
+- build-args can be dropped if you're not afflicted by a proxy
+
+```
+export VERSION=0.0.2
+docker build --build-arg version=${VERSION} --build-arg http_proxy=$http_proxy --build-arg https_proxy=$https_proxy -t zingstats/jenkins-stats:${VERSION} -t zingstats/jenkins-stats:latest .
+```
+
+#### Run container
+
+```
+docker run -v $(pwd)/output:/var/www/html/jenkins/stats -e JENKINS_URL=<jenkins url> -e JENKINS_JOB=<jenkins job name> zingstats/jenkins-stats:${VERSION}
+```
 
 ## Testing
 
@@ -75,8 +89,8 @@ General strategy
 ## Roadmap / Potential TODO
 
 1. Add proper testing.
-2. Containerise.
-3. Move from JSONL to a db?
+2. Move from JSONL to a db?
+3. Split gathering and analysis into separate tools?
 
 ## License
 This project is licensed under the Apache 2.0 license. Please see [LICENSE](LICENSE) for more info.

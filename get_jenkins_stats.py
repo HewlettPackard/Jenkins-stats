@@ -61,8 +61,10 @@ def main():
     script_name = __file__
     parser.set_defaults(
             script_dir=os.path.abspath((os.path.dirname(script_name))))
-    parser.add_argument('-s', '--server', dest='jenkins_server')
-    parser.add_argument('-j', '--job', dest='jenkins_job')
+    parser.add_argument('-s', '--server', dest='jenkins_url',
+                        default=os.getenv('JENKINS_URL', ''))
+    parser.add_argument('-j', '--job', dest='jenkins_job',
+                        default=os.getenv('JENKINS_JOB', ''))
     parser.add_argument('-o', '--output-dir', dest='output_dir',
                         default='/var/www/html/jenkins/stats/',
                         help='Path to output files to (def: %(default)s).')
@@ -94,6 +96,15 @@ def main():
                         help='Do not write log output to file.')
     args = parser.parse_args()
     configure_logging(args)
+
+    if not args.jenkins_job:
+        log.critical('No jenkins job specified, must provide -j/--job or set '
+                     'JENKINS_JOB env var')
+        exit(1)
+    elif not args.jenkins_url:
+        log.critical('No jenkins server specified, must provide -s/--server '
+                     'or set JENKINS_URL env var')
+        exit(1)
 
     # enable logging multiple columns in output
     pd.set_option('display.width', 1000)
@@ -327,11 +338,11 @@ def get_builds(args, data_file):
     if first_run:
         log.info('%s is a new job, querying all builds', args.jenkins_job)
         payload = {'tree': 'allBuilds[number]'}
-        jenkins_url = '%s/job/%s/api/json' % (args.jenkins_server,
+        jenkins_url = '%s/job/%s/api/json' % (args.jenkins_url,
                                               args.jenkins_job)
     else:
         payload = {}
-        jenkins_url = '%s/job/%s/api/json' % (args.jenkins_server,
+        jenkins_url = '%s/job/%s/api/json' % (args.jenkins_url,
                                               args.jenkins_job)
 
     log.debug('Retrieving jenkins data from %s', jenkins_url)
@@ -355,7 +366,7 @@ def get_builds(args, data_file):
             log.debug('Already stored record for build %d', number)
             continue
         log.debug('Retrieving record for build %d', number)
-        jenkins_url = '%s/job/%s/%s/api/json' % (args.jenkins_server,
+        jenkins_url = '%s/job/%s/%s/api/json' % (args.jenkins_url,
                                                  args.jenkins_job, number)
         r = session.get(jenkins_url, verify=args.verify_https_requests)
         build_data = r.json()
