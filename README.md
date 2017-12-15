@@ -6,6 +6,8 @@
 
 Tool for gathering job data from the Jenkins CI system (https://jenkins-ci.org/) and generating summary stat reports and graphs. These reports cover metrics such as success/failure rates and job duration.
 
+Used initially for jobs triggered by OpenStack Zuul (https://docs.openstack.org/infra/zuul/) but should work with other Jenkins jobs too.
+
 ## Screenshots
 
 Example output with overall and per-slave success/failure rates
