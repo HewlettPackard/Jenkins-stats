@@ -1,3 +1,5 @@
+[![Docker Automated build](https://img.shields.io/docker/automated/zingstats/zing-stats.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/zingstats/zing-stats/)
+
 &copy; Copyright 2017 Hewlett Packard Enterprise Development LP
 
 # jenkins-stats
