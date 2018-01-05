@@ -17,7 +17,7 @@
 
 FROM python:2.7-slim
 
-ENV DOCKER_TAG
+ENV DOCKER_TAG="not_set"
 # docker build with --build-arg version=x.y.z to bake in version
 #
 #ARG version="0.0.0"
