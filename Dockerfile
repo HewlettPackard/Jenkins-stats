@@ -17,11 +17,9 @@
 
 FROM python:2.7-slim
 
-ENV DOCKER_TAG="not_set"
 # docker build with --build-arg version=x.y.z to bake in version
 #
-#ARG version="0.0.0"
-ARG version=$DOCKER_TAG
+ARG version="0.0.0"
 LABEL version=$version
 
 LABEL description="jenkins stats reporter"
