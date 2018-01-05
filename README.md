@@ -1,3 +1,4 @@
+[![Build Status](https://travis-ci.org/HewlettPackard/Jenkins-stats.svg?branch=master)](https://travis-ci.org/HewlettPackard/Jenkins-stats)
 [![Docker Automated build](https://img.shields.io/docker/automated/zingstats/zing-stats.svg?maxAge=2592000?style=plastic)](https://hub.docker.com/r/zingstats/Jenkins-stats/)
 
 &copy; Copyright 2017 Hewlett Packard Enterprise Development LP
