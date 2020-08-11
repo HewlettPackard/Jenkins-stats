@@ -21,7 +21,7 @@ python-dateutil==2.6.1
 python-mimeparse==1.6.0
 python-subunit==1.2.0
 pytz==2017.3
-requests==2.18.4
+requests==2.20.0
 six==1.11.0
 testtools==2.3.0
 traceback2==1.4.0
