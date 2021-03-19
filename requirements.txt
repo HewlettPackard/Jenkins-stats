@@ -7,7 +7,7 @@ fixtures==3.0.0
 functools32==3.2.3.post2
 idna==2.6
 ipython-genutils==0.2.0
-Jinja2==2.9.6
+Jinja2==2.11.3
 jsonschema==2.6.0
 jupyter-core==4.4.0
 linecache2==1.0.0
